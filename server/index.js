@@ -67,9 +67,13 @@ app.use("/admin", (req, res, next) => { res.setHeader("X-Robots-Tag", "noindex, 
 const STATIC_OPTIONS = {
   extensions: ["html"],
   setHeaders: (res, filePath) => {
-    // CSS/JS/imagens são versionados por "?v=N" no HTML — cache longo é seguro.
-    if (/\.(css|js|jpg|jpeg|png|webp|svg|woff2?)$/i.test(filePath)) {
-      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+    // CSS/JS revalidam sempre (ETag): um deploy novo nunca fica preso em cache
+    // antigo no navegador (foi o que quebrou o layout do logo/idiomas no Chrome).
+    // Imagens mantêm 1 dia de cache.
+    if (/\.(css|js)$/i.test(filePath)) {
+      res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+    } else if (/\.(jpg|jpeg|png|webp|svg|woff2?)$/i.test(filePath)) {
+      res.setHeader("Cache-Control", "public, max-age=86400");
     } else if (/\.html$/i.test(filePath)) {
       res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
     }
