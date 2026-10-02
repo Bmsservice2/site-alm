@@ -134,6 +134,15 @@
     "© 2026 Almeida, Leal & Molina Advogados. Todos os direitos reservados. CNPJ 52.297.109/0001-36.": {en:"© 2026 Almeida, Leal & Molina Advogados. All rights reserved. CNPJ 52.297.109/0001-36.", es:"© 2026 Almeida, Leal & Molina Advogados. Todos los derechos reservados. CNPJ 52.297.109/0001-36."},
     "Site por": {en:"Website by", es:"Sitio web por"}, "BMS Service": {en:"BMS Service", es:"BMS Service"},
     "Pós-graduado em Direito Financeiro e Tributário pela UFFRJ/SEFAZ.": {en:"Postgraduate degree in Financial and Tax Law from UFFRJ/SEFAZ.", es:"Posgrado en Derecho Financiero y Tributario por UFFRJ/SEFAZ."},
+    "Orientação às empresas sobre os impactos da Reforma Tributária, com atuação consultiva e contenciosa.": {"en": "Guidance for companies on the impacts of Tax Reform, with advisory and litigation work.", "es": "Orientación a las empresas sobre los impactos de la Reforma Tributaria, con actuación consultiva y contenciosa."},
+    "Análise e recuperação de créditos tributários, nas esferas administrativa e judicial.": {"en": "Analysis and recovery of tax credits, in administrative and judicial proceedings.", "es": "Análisis y recuperación de créditos tributarios, en las esferas administrativa y judicial."},
+    "Atuação em procedimentos arbitrais, apresentada como serviço independente das demais áreas.": {"en": "Work in arbitration proceedings, offered as a service independent from the firm's other practice areas.", "es": "Actuación en procedimientos arbitrales, ofrecida como servicio independiente de las demás áreas."},
+    "Serviço": {"en": "Service", "es": "Servicio"},
+    "Responsável(is):": {"en": "Responsible partner(s):", "es": "Socio(s) responsable(s):"},
+    "Ex-Conselheiro do Conselho de Contribuintes do Estado do Rio de Janeiro, professor de Direito Tributário e mestre em Finanças Públicas e Tributação pela UERJ.": {"en": "Former member of the Rio de Janeiro State Taxpayers' Council, Tax Law professor and holder of a master's degree in Public Finance and Taxation from UERJ.", "es": "Exconsejero del Consejo de Contribuyentes del Estado de Río de Janeiro, profesor de Derecho Tributario y magíster en Finanzas Públicas y Tributación por la UERJ."},
+    "Yan Dutra Molina, Raíssa de Almeida e Marcello Leal": {"en": "Yan Dutra Molina, Raíssa de Almeida and Marcello Leal", "es": "Yan Dutra Molina, Raíssa de Almeida y Marcello Leal"},
+    "Não foi possível carregar as publicações agora.": {"en": "We could not load the publications right now.", "es": "No fue posible cargar las publicaciones ahora."},
+    "Abrir a página de conteúdos": {"en": "Open the insights page", "es": "Abrir la página de contenidos"},
     "Navegação": {en:"Navigation", es:"Navegación"}
   };
 

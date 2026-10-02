@@ -78,7 +78,7 @@ window.ALM_EQUIPE = [
     ]
   },
 
-  { slug: "jessica-bastos",    nome: "Jessica Bastos",    cargo: "Gerente",                                   areas: ["gestao", "tributario"],       foto: "assets/img/equipe/jessica-bastos",    linkedin: null, bio: [] },
+  { slug: "jessica-bastos",    nome: "Jéssica Bastos",    cargo: "Gerente",                                   areas: ["gestao", "tributario"],       foto: "assets/img/equipe/jessica-bastos",    linkedin: null, bio: [] },
   { slug: "eduarda-velloso",   nome: "Eduarda Velloso",   cargo: "Coordenadora Contencioso",                  areas: ["contencioso"],              foto: "assets/img/equipe/eduarda-velloso",   linkedin: null, bio: [] },
   { slug: "luana-secundino",   nome: "Luana Secundino",   cargo: "Advogada Consultivo Tributário",            areas: ["tributario"],               foto: "assets/img/equipe/luana-secundino",   linkedin: null, bio: [] },
   { slug: "larissa-piotto",    nome: "Larissa Piotto",    cargo: "Advogada Consultivo Tributário",            areas: ["tributario"],               foto: null /* TODO: foto não enviada */, linkedin: null, bio: [] },
