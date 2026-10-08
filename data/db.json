@@ -1,10 +1,6 @@
 {
   "users": [
     {
-      "nome": "Administrador",
-      "email": "admin@almeidaleal.adv.br",
-      "papel": "admin",
-      "senhaHash": "Senha123"
     }
   ],
   "posts": [
