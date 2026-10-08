@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "nome": "Administrador",
+      "email": "admin@almeidaleal.adv.br",
+      "papel": "admin",
+      "senhaHash": ""
+    }
+  ],
+  "posts": [
+
+    {
+      "id": "p-cbs-estoque-abertura",
+      "slug": "credito-de-cbs-sobre-estoque-de-abertura",
+      "titulo": "O crédito de CBS sobre estoque de abertura vale para quem?",
+      "resumo": "Artigo de Marcello Leal publicado no LinkedIn sobre o crédito de CBS relativo ao estoque de abertura.",
+      "conteudo": "<p>Este artigo foi publicado originalmente por Marcello Leal no LinkedIn.</p><p>O texto integral pode ser reproduzido aqui mediante autorização do autor; até lá, a publicação direciona para o original.</p>",
+      "categoria": "Tributário",
+      "autor": "marcello-leal",
+      "data": "",
+      "capa": "",
+      "linkExterno": "https://www.linkedin.com/pulse/o-cr%C3%A9dito-de-cbs-sobre-estoque-abertura-vale-para-quem-marcello-leal-otzcf/",
+      "status": "publicado",
+      "atualizadoEm": "2026-09-23T12:00:00.000Z"
+    }
+  ],
+  "settings": {},
+  "meta": {
+    "criadoEm": "2026-09-28T19:09:58.227Z",
+    "postsSeeded": true
+  }
+}
