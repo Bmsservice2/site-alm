@@ -62,7 +62,7 @@ window.ALM_EQUIPE = [
     cargo: "Sócio",
     socio: true,
     oab: "OAB/RJ 99.350",
-    areas: ["tributario", "contencioso"],
+    areas: ["tributario", "contencioso-tributario"],
     foto: "assets/img/equipe/yan-molina",
     linkedin: "https://www.linkedin.com/in/yan-dutra-molina-97524257/",
     destaque: "Mais de 25 anos de advocacia no contencioso tributário e empresarial.",
@@ -79,27 +79,25 @@ window.ALM_EQUIPE = [
   },
 
   { slug: "jessica-bastos",    nome: "Jéssica Bastos",    cargo: "Gerente",                                   areas: ["gestao", "tributario"],       foto: "assets/img/equipe/jessica-bastos",    linkedin: null, bio: [] },
-  { slug: "eduarda-velloso",   nome: "Eduarda Velloso",   cargo: "Coordenadora Contencioso",                  areas: ["contencioso"],              foto: "assets/img/equipe/eduarda-velloso",   linkedin: null, bio: [] },
-  { slug: "luana-secundino",   nome: "Luana Secundino",   cargo: "Advogada Consultivo Tributário",            areas: ["tributario"],               foto: "assets/img/equipe/luana-secundino",   linkedin: null, bio: [] },
-  { slug: "larissa-piotto",    nome: "Larissa Piotto",    cargo: "Advogada Consultivo Tributário",            areas: ["tributario"],               foto: null /* TODO: foto não enviada */, linkedin: null, bio: [] },
-  { slug: "gabriela-paranhos", nome: "Gabriela Paranhos", cargo: "Advogada Consultivo Tributário",            areas: ["tributario"],               foto: null /* TODO: foto não enviada */, linkedin: null, bio: [] },
-  { slug: "julia-motta",       nome: "Julia Motta",       cargo: "Advogada Contencioso",                      areas: ["contencioso"],              foto: "assets/img/equipe/julia-motta",       linkedin: null, bio: [] },
+  { slug: "eduarda-velloso",   nome: "Eduarda Velloso",   cargo: "Coordenadora Contencioso",                  areas: ["tributario", "contencioso-tributario"],              foto: "assets/img/equipe/eduarda-velloso",   linkedin: null, bio: [] },
+  { slug: "luana-secundino",   nome: "Luana Secundino",   cargo: "Advogada Consultivo Tributário",            areas: ["tributario", "consultivo-tributario"],               foto: "assets/img/equipe/luana-secundino",   linkedin: null, bio: [] },
+  { slug: "larissa-piotto",    nome: "Larissa Piotto",    cargo: "Advogada Consultivo Tributário",            areas: ["tributario", "consultivo-tributario"],               foto: null, linkedin: null, bio: [] },
+  { slug: "gabriela-paranhos", nome: "Gabriela Paranhos", cargo: "Advogada Consultivo Tributário",            areas: ["tributario", "consultivo-tributario"],               foto: null, linkedin: null, bio: [] },
+  { slug: "julia-motta",       nome: "Julia Motta",       cargo: "Advogada Contencioso",                      areas: ["tributario", "contencioso-tributario"],              foto: "assets/img/equipe/julia-motta",       linkedin: null, bio: [] },
   { slug: "nicolas-salles",    nome: "Nicolas Salles",    cargo: "Advogado Consultivo e Contencioso Trabalhista", areas: ["trabalhista"],          foto: "assets/img/equipe/nicolas-salles",    linkedin: null, bio: [] },
-  { slug: "jaqueline-costa",   nome: "Jaqueline Costa",   cargo: "Trainee Contencioso",                       areas: ["contencioso"],              foto: "assets/img/equipe/jaqueline-costa",   linkedin: null, bio: [] },
+  { slug: "jaqueline-costa",   nome: "Jaqueline Costa",   cargo: "Trainee Contencioso",                       areas: ["tributario", "contencioso-tributario"],              foto: "assets/img/equipe/jaqueline-costa",   linkedin: null, bio: [] },
   { slug: "leonardo-crivano",  nome: "Leonardo Crivano",  cargo: "Advogado Contratos e Societário",           areas: ["contratos", "societario"],  foto: "assets/img/equipe/leonardo-crivano",  linkedin: null, bio: [] },
-  { slug: "gabriel-pereira",   nome: "Gabriel Pereira",   cargo: "Estagiário Contencioso",                    areas: ["contencioso"],              foto: null /* TODO: foto não enviada */, linkedin: null, bio: [] },
+  { slug: "gabriel-pereira",   nome: "Gabriel Pereira",   cargo: "Estagiário Contencioso",                    areas: ["tributario", "contencioso-tributario"],              foto: null, linkedin: null, bio: [] },
   { slug: "luciana-belarmino", nome: "Luciana Belarmino", cargo: "Advogada Consultivo",                       areas: ["contratos", "societario"],   foto: "assets/img/equipe/luciana-belarmino", linkedin: null, bio: [] },
-  { slug: "pedro-bornay",      nome: "Pedro Bornay",      cargo: "Estagiário Contratos e Societário",         areas: ["contratos", "societario"],  foto: null /* TODO: foto não enviada */, linkedin: null, bio: [] },
-  { slug: "nathalia-vivas",    nome: "Nathalia Vivas",    cargo: "Estagiária Contratos e Societário",         areas: ["contratos", "societario"],  foto: null /* TODO: foto não enviada */, linkedin: null, bio: [] },
+  { slug: "pedro-bornay",      nome: "Pedro Bornay",      cargo: "Estagiário Contratos e Societário",         areas: ["contratos", "societario"],  foto: null, linkedin: null, bio: [] },
+  { slug: "nathalia-vivas",    nome: "Nathalia Vivas",    cargo: "Estagiária Contratos e Societário",         areas: ["contratos", "societario"],  foto: null, linkedin: null, bio: [] },
 ];
 
-/* Rótulos dos filtros da Equipe (ordem de exibição) */
-window.ALM_FILTROS_EQUIPE = [
-  { id: "todos", rotulo: "Todos" },
-  { id: "tributario", rotulo: "Tributário" },
-  { id: "contencioso", rotulo: "Contencioso" },
-  { id: "contratos", rotulo: "Contratos e Societário" },
-  { id: "trabalhista", rotulo: "Trabalhista" },
-  { id: "consultivo", rotulo: "Consultivo" },
-  { id: "gestao", rotulo: "Gestão" }
-];
+/* Filtros da Equipe (ordem de exibição). Um filtro só aparece se houver
+   profissional vinculado a ele; os rótulos traduzidos ficam em
+   server/site/content.js. "tributario" agrega as duas frentes. */
+window.ALM_FILTROS_EQUIPE = ["todos", "tributario", "consultivo-tributario", "contencioso-tributario", "contratos", "civel", "trabalhista", "arbitragem", "gestao"];
+
+/* Ordem por cargo: gestão, coordenação, advogados, trainees, estagiários.
+   Dentro do mesmo cargo vale a ordem desta lista. */
+window.ALM_ORDEM_CARGO = [/gerente/i, /coordenador/i, /advogad/i, /trainee/i, /estagi/i];

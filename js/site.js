@@ -303,6 +303,82 @@
      ============================================================ */
   /* Card de publicação: js/lib/post-card.js (compartilhado com o blog) */
 
+  /* Carrossel horizontal das últimas publicações (máx. 8 na home).
+     O limite é só de apresentação: a lista vem de ALM_STORE.posts.list()
+     (já ordenada do mais recente ao mais antigo) e nada é apagado — a
+     página /conteudos/ continua listando todas. Rolagem nativa com
+     scroll-snap (toque funciona de graça); setas, pontos e teclado
+     apenas acionam essa rolagem. */
+  var LATEST_MAX = 8;
+
+  function buildCarousel(box, posts) {
+    box.innerHTML =
+      '<div class="pcar__viewport" role="group" aria-roledescription="carrossel" aria-label="Publicações da equipe" tabindex="0">' +
+        '<div class="pcar__track">' +
+          posts.map(function (p) { return '<div class="pcar__slide">' + window.ALM_postCard(p) + '</div>'; }).join("") +
+        '</div></div>' +
+      '<div class="pcar__controls">' +
+        '<button type="button" class="pcar__btn" data-dir="-1" aria-label="Publicações anteriores"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>' +
+        '<div class="pcar__dots"></div>' +
+        '<button type="button" class="pcar__btn" data-dir="1" aria-label="Próximas publicações"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>' +
+      '</div>';
+
+    var vp = box.querySelector(".pcar__viewport");
+    var slides = box.querySelectorAll(".pcar__slide");
+    var prev = box.querySelector('[data-dir="-1"]'), next = box.querySelector('[data-dir="1"]');
+    var dotsBox = box.querySelector(".pcar__dots");
+    var controls = box.querySelector(".pcar__controls");
+    var pages = 1;
+
+    function maxScroll() { return vp.scrollWidth - vp.clientWidth; }
+    function step() { return slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : vp.clientWidth; }
+    function current() {
+      var m = maxScroll();
+      if (m <= 0) { return 0; }
+      return Math.min(pages - 1, Math.round(vp.scrollLeft / m * (pages - 1)));
+    }
+    function goTo(page) {
+      var m = maxScroll();
+      vp.scrollTo({ left: pages <= 1 ? 0 : (page >= pages - 1 ? m : page * vp.clientWidth), behavior: "smooth" });
+    }
+    function sync() {
+      var i = current(), m = maxScroll();
+      prev.disabled = vp.scrollLeft <= 2;
+      next.disabled = vp.scrollLeft >= m - 2;
+      Array.prototype.forEach.call(dotsBox.children, function (d, n) {
+        if (n === i) { d.setAttribute("aria-current", "true"); } else { d.removeAttribute("aria-current"); }
+      });
+    }
+    function layout() {
+      var m = maxScroll();
+      pages = m > 2 ? Math.ceil((m + vp.clientWidth) / vp.clientWidth - 0.001) : 1;
+      controls.hidden = pages <= 1;
+      dotsBox.innerHTML = "";
+      for (var n = 0; n < pages; n++) {
+        var d = document.createElement("button");
+        d.type = "button"; d.className = "pcar__dot"; d.setAttribute("aria-label", "Ir para o grupo " + (n + 1) + " de " + pages);
+        d.addEventListener("click", (function (k) { return function () { goTo(k); }; })(n));
+        dotsBox.appendChild(d);
+      }
+      sync();
+    }
+
+    prev.addEventListener("click", function () { vp.scrollBy({ left: -step(), behavior: "smooth" }); });
+    next.addEventListener("click", function () { vp.scrollBy({ left: step(), behavior: "smooth" }); });
+    vp.addEventListener("scroll", function () { window.requestAnimationFrame(sync); }, { passive: true });
+    vp.addEventListener("keydown", function (e) {
+      if (e.target !== vp) { return; }
+      if (e.key === "ArrowRight") { e.preventDefault(); vp.scrollBy({ left: step(), behavior: "smooth" }); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); vp.scrollBy({ left: -step(), behavior: "smooth" }); }
+      else if (e.key === "Home") { e.preventDefault(); goTo(0); }
+      else if (e.key === "End") { e.preventDefault(); vp.scrollTo({ left: maxScroll(), behavior: "smooth" }); }
+    });
+    // Link focado por Tab fora da área visível: o navegador já rola até ele.
+    window.addEventListener("resize", layout);
+    layout();
+    if ("ResizeObserver" in window) { new ResizeObserver(layout).observe(vp); }
+  }
+
   function renderLatest() {
     var box = document.getElementById("latest-posts");
     if (!box || !window.ALM_STORE) { return; }
@@ -311,7 +387,7 @@
         box.innerHTML = '<p class="posts__empty">As primeiras publicações da equipe estarão aqui em breve.</p>';
         return;
       }
-      box.innerHTML = list.slice(0, 3).map(function (p) { return window.ALM_postCard(p); }).join("");
+      buildCarousel(box, list.slice(0, LATEST_MAX));
     }).catch(function () {
       box.innerHTML = '<p class="posts__empty">Não foi possível carregar as publicações agora. <a class="link-arrow" href="conteudos/">Abrir a página de conteúdos</a></p>';
     });

@@ -1,13 +1,15 @@
 /* ============================================================
-   PRIMEIRO ACESSO — cria o administrador inicial se o banco
-   ainda não tiver nenhum usuário.
-   Lê ADMIN_EMAIL e ADMIN_PASSWORD do ambiente (defina-as no
-   Coolify). Sem elas, gera uma senha aleatória e a imprime UMA
-   vez no log — troque-a pelo painel assim que entrar.
+   ADMINISTRADOR INICIAL — garante, a cada boot, que o usuário
+   administrativo exista e que a senha confira com a configurada.
+   Lê ADMIN_EMAIL e ADMIN_PASSWORD do ambiente; sem elas, usa a
+   credencial FIXA DE DEMONSTRAÇÃO abaixo (documentada no LEIA-ME).
+   ANTES DE PUBLICAR EM PRODUÇÃO: defina ADMIN_PASSWORD forte no
+   ambiente (ou remova DEMO_ADMIN) e troque a senha pelo painel.
    ============================================================ */
+const DEMO_ADMIN = { email: "admin@almeidaleal.adv.br", senha: "AlmeidaDemo2026!" };
+
 "use strict";
 const bcrypt = require("bcryptjs");
-const crypto = require("crypto");
 const db = require("./store");
 const { isEmail } = require("./util");
 const fs = require("fs");
@@ -16,34 +18,31 @@ const vm = require("vm");
 const { sanitizeConteudo } = require("./sanitize");
 
 async function ensureAdmin() {
-  const users = await db.read((d) => d.users);
-  if (users.length > 0) { return; }
-
-  const email = (process.env.ADMIN_EMAIL || "admin@almeidaleal.adv.br").trim().toLowerCase();
-  let senha = process.env.ADMIN_PASSWORD;
-  let gerada = false;
-  if (!senha) { senha = crypto.randomBytes(9).toString("base64url"); gerada = true; }
+  const email = (process.env.ADMIN_EMAIL || DEMO_ADMIN.email).trim().toLowerCase();
+  const senha = process.env.ADMIN_PASSWORD || DEMO_ADMIN.senha;
   if (!isEmail(email)) {
     console.error("[seed] ADMIN_EMAIL inválido (" + email + "). Corrija a variável de ambiente e reinicie.");
     return;
   }
 
-  const senhaHash = await bcrypt.hash(senha, 12);
-  await db.mutate((d) => {
-    d.users.push({ nome: "Administrador", email, papel: "admin", senhaHash });
-  });
+  // Idempotente: procura o usuário pelo e-mail (nunca duplica) e só regrava o
+  // hash quando a senha armazenada NÃO confere com a configurada. Antes, o
+  // admin só era criado com o banco vazio — um data/db.json já existente (com
+  // hash de outra senha) fazia ADMIN_PASSWORD ser ignorada e o login falhar.
+  // Defina ADMIN_ENFORCE_PASSWORD=false para que senhas trocadas pelo painel
+  // não sejam revertidas ao reiniciar (use isso em produção, após trocar a senha).
+  const enforce = String(process.env.ADMIN_ENFORCE_PASSWORD || "true").toLowerCase() !== "false";
+  const atual = await db.read((d) => d.users.find((u) => u.email === email));
+  if (atual && (!enforce || await bcrypt.compare(senha, atual.senhaHash || ""))) { return; }
 
-  console.log("============================================================");
-  console.log(" Primeiro acesso ao painel criado:");
-  console.log("   E-mail: " + email);
-  if (gerada) {
-    console.log("   Senha (gerada automaticamente, anote agora): " + senha);
-    console.log("   Defina ADMIN_PASSWORD nas variáveis de ambiente para controlar a senha inicial.");
-  } else {
-    console.log("   Senha: a definida em ADMIN_PASSWORD");
-  }
-  console.log(" Troque a senha (ou crie seu usuário e remova este) em /admin → Usuários.");
-  console.log("============================================================");
+  const senhaHash = await bcrypt.hash(senha, 12);
+  const acao = await db.mutate((d) => {
+    const u = d.users.find((x) => x.email === email);
+    if (u) { u.senhaHash = senhaHash; u.papel = "admin"; return "atualizado"; }
+    d.users.push({ nome: "Administrador", email, papel: "admin", senhaHash });
+    return "criado";
+  });
+  console.log("[seed] Administrador " + email + " " + acao + " (senha definida em ADMIN_PASSWORD / padrão de demonstração).");
 }
 
 /* Publica as postagens de js/data/seed-posts.js UMA vez (flag em

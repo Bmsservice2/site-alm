@@ -1,10 +1,13 @@
 {
   "users": [
     {
+      "nome": "Administrador",
+      "email": "admin@almeidaleal.adv.br",
+      "papel": "admin",
+      "senhaHash": "$2a$12$MMwEQq/QgZkz0U0s0ukkKODAu.l33SZdhngHHIA85nXYpMFzZv5oS"
     }
   ],
   "posts": [
-
     {
       "id": "p-cbs-estoque-abertura",
       "slug": "credito-de-cbs-sobre-estoque-de-abertura",
@@ -13,11 +16,11 @@
       "conteudo": "<p>Este artigo foi publicado originalmente por Marcello Leal no LinkedIn.</p><p>O texto integral pode ser reproduzido aqui mediante autorização do autor; até lá, a publicação direciona para o original.</p>",
       "categoria": "Tributário",
       "autor": "marcello-leal",
-      "data": "",
-      "capa": "",
+      "data": "2026-09-10",
+      "capa": "/uploads/1e67df3a0452e4526d7ee39302cde1af.webp",
       "linkExterno": "https://www.linkedin.com/pulse/o-cr%C3%A9dito-de-cbs-sobre-estoque-abertura-vale-para-quem-marcello-leal-otzcf/",
       "status": "publicado",
-      "atualizadoEm": "2026-09-23T12:00:00.000Z"
+      "atualizadoEm": "2026-10-09T16:56:34.023Z"
     }
   ],
   "settings": {},

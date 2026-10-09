@@ -1,49 +1,17 @@
-/* ÁREAS DE ATUAÇÃO — conteúdo institucional centralizado. */
+/* ÁREAS DE ATUAÇÃO — estrutura. Os textos (PT/EN/ES) ficam em server/site/content.js.
+   - path: endereço sob /atuacao/
+   - equipe: ids de área do cadastro de pessoas (js/data/equipe.js) usados para listar a equipe relacionada
+   - responsaveis: sócios responsáveis (todo painel de área precisa de ao menos um)
+   - categoria: valor do campo "area" das publicações relacionadas */
 window.ALM_AREAS = [
-  {
-    id: "tributario",
-    titulo: "Direito Tributário",
-    resumo: "Carro-chefe do escritório, com atuação consultiva e contenciosa em matéria tributária.",
-    icone: "balanca",
-    equipe: ["tributario"],
-    detalhe: []
-  },
-  {
-    id: "societario",
-    titulo: "Societário",
-    resumo: "Estruturação e organização de sociedades e acompanhamento das relações entre sócios.",
-    icone: "estrutura",
-    equipe: ["societario"],
-    detalhe: []
-  },
-  {
-    id: "contratos",
-    titulo: "Contratos",
-    resumo: "Elaboração, revisão e negociação de contratos e atuação em disputas deles decorrentes.",
-    icone: "documento",
-    equipe: ["contratos"],
-    detalhe: []
-  },
-  {
-    id: "civel",
-    titulo: "Cível",
-    resumo: "Assessoria preventiva e condução de demandas cíveis de interesse de empresas e pessoas.",
-    icone: "pilar",
-    equipe: ["contencioso"],
-    detalhe: []
-  },
-  {
-    id: "trabalhista",
-    titulo: "Trabalhista",
-    resumo: "Orientação nas relações de trabalho e defesa em reclamações e processos trabalhistas.",
-    icone: "pessoas",
-    equipe: ["trabalhista"],
-    detalhe: []
-  }
-];
-
-window.ALM_DESTAQUES = [
-  { id: "reforma-tributaria", titulo: "Reforma Tributária", href: "reforma-tributaria/", resumo: "Página dedicada ao acompanhamento e à preparação para a Reforma Tributária." },
-  { id: "recuperacao-creditos", titulo: "Recuperação de Créditos", href: "recuperacao-creditos/", resumo: "Página dedicada à atuação do escritório em recuperação de créditos tributários." },
-  { id: "arbitragem", titulo: "Arbitragem", href: "arbitragem/", resumo: "Serviço independente, apresentado em página própria." }
+  { id: "tributario",  path: "tributario",                  equipe: ["tributario"],              responsaveis: ["raissa-de-almeida", "marcello-leal", "yan-molina"] },
+  { id: "consultivo",  path: "tributario/consultivo",       equipe: ["consultivo-tributario"],   responsaveis: ["raissa-de-almeida", "marcello-leal"], parent: "tributario" },
+  { id: "contencioso", path: "tributario/contencioso",      equipe: ["contencioso-tributario"],  responsaveis: ["yan-molina", "marcello-leal"], parent: "tributario" },
+  { id: "reforma",     path: "reforma-tributaria",          equipe: [],                          responsaveis: ["marcello-leal"], parent: "tributario" },
+  { id: "recuperacao", path: "recuperacao-de-creditos",     equipe: [],                          responsaveis: ["marcello-leal"], parent: "tributario" },
+  { id: "societario",  path: "societario",                  equipe: ["societario"],              responsaveis: ["marcello-leal", "yan-molina"] },
+  { id: "contratos",   path: "contratos",                   equipe: ["contratos"],               responsaveis: ["marcello-leal", "yan-molina"] },
+  { id: "civel",       path: "civel",                       equipe: ["civel"],                   responsaveis: ["yan-molina"] },
+  { id: "trabalhista", path: "trabalhista",                 equipe: ["trabalhista"],             responsaveis: ["yan-molina"] },
+  { id: "arbitragem",  path: "arbitragem",                  equipe: ["arbitragem"],              responsaveis: ["marcello-leal"], independente: true }
 ];

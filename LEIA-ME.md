@@ -36,10 +36,12 @@ Abra `http://localhost:3000` (ou a porta que você definiu em `PORT`).
 | Painel (onde a equipe escreve os posts) | `/admin/` |
 | Perfil de integrante | `/#equipe/marcello-leal` |
 
-No primeiro boot, se ainda não existir nenhum usuário, o servidor cria um administrador a
-partir de `ADMIN_EMAIL`/`ADMIN_PASSWORD` (ou gera uma senha aleatória e imprime nos logs, se
-você não definir `ADMIN_PASSWORD`). Depois de entrar, crie o usuário de cada advogado(a) que
-vai escrever em **Painel → Usuários** e, se quiser, remova o administrador de teste.
+**Credencial de demonstração (fixa):** `admin@almeidaleal.adv.br` / `AlmeidaDemo2026!`.
+A cada boot o servidor garante, de forma idempotente (sem duplicar), que esse administrador exista
+e que a senha confira com `ADMIN_PASSWORD` (se a variável não for definida, usa a senha de
+demonstração acima — definida em `server/lib/seed.js`). Antes de publicar em produção: defina uma
+`ADMIN_PASSWORD` forte no ambiente e, depois de trocar a senha pelo painel, use
+`ADMIN_ENFORCE_PASSWORD=false` para que ela não seja revertida ao reiniciar.
 
 ## ⚠ Antes de colocar no ar: gere as variáveis de produção
 
