@@ -480,3 +480,21 @@ html.xp-has-cursor input, html.xp-has-cursor textarea { cursor: text; }
 @media (max-width: 699px) {
   .hero:not(:has(.is-playing)) .hero__overlay { background: linear-gradient(180deg, rgba(8, 13, 19, 0.4) 0%, rgba(8, 13, 19, 0.1) 35%, rgba(8, 13, 19, 0.82) 82%); }
 }
+
+/* ============================================================
+   Botões Consultivo / Contencioso (abrem a equipe responsável)
+   ============================================================ */
+.area__head { padding-bottom: 6px; }
+.area__modes { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 0 18px 116px; }
+.area__mode {
+  font: inherit; font-size: var(--text-xs); line-height: 1.4; cursor: pointer;
+  border: 1px solid var(--line); padding: 4px 12px; border-radius: 20px;
+  color: var(--muted); background: var(--paper);
+  transition: border-color var(--dur-fast), color var(--dur-fast), background var(--dur-fast);
+}
+.area__mode:hover, .area__mode:focus-visible { border-color: var(--brass); color: var(--text); }
+.area__mode.is-active { border-color: var(--brass); color: var(--text); background: #fff; font-weight: 600; }
+.area__team { margin: 0 0 22px; }
+.area__team[hidden] { display: none; }
+.area__team-empty { margin: 0; font-size: var(--text-sm); font-style: italic; }
+@media (max-width: 599px) { .area__modes { padding-left: 58px; } }

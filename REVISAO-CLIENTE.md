@@ -20,6 +20,17 @@
 - Seletor PT / EN / ES foi adicionado ao header, visível também no mobile.
 - Capa de demonstração do blog que usava Unsplash foi retirada.
 
+## Reunião de 03/11 (Leal Molina)
+
+- Faixa de áreas do topo do hero e parágrafo "Os sócios reúnem trajetória…" removidos.
+- Hero: sem foto dos sócios e sem vídeo; fundo abstrato (`hero-abstrato`) enviado pelo Marcelo.
+- "O Escritório": foto do corredor substituída pela foto de estúdio que saiu do banner.
+- Botões Consultivo / Contencioso em cada área abrem a equipe responsável.
+  **PENDENTE:** a Jéssica vai definir a equipe de cada botão — hoje provisória em
+  `js/data/areas.js` (`ALM_AREAS_TIMES`).
+- Foto do Leonardo Crivano (fundo claro) substituída por nova foto com fundo escuro,
+  conforme pedido do cliente.
+
 ## O que NÃO deve ser inventado
 
 Ainda dependem de confirmação/arquivos do escritório:

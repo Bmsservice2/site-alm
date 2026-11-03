@@ -157,12 +157,11 @@ Nathalia Vivas, e as biografias dos integrantes que não são sócios (nunca for
 Botão **Painel** (cadeado) no topo de todas as páginas, link no menu lateral e no rodapé.
 No painel, "Ver o site" e "Ver blog publicado" levam de volta.
 
-## Vídeo do hero
+## Fundo do hero
 
-Vídeo **local**, sem YouTube: `assets/video/banner.webm` (VP9, 0,5 MB) e `banner.mp4`
-(H.264, 0,7 MB), ambos sem áudio, em loop e mudos. Até o vídeo começar, e se ele não carregar,
-fica a foto dos sócios. O arquivo enviado tem 852×480; para mais nitidez em telas grandes,
-substitua pelos mesmos nomes em 1920×1080 (ver `assets/video/LEIA-ME.txt`).
+O vídeo e a foto dos sócios foram retirados do hero (reunião de 03/11). O fundo agora é a
+imagem abstrata `assets/img/escritorio/hero-abstrato.webp` (com `.jpg` de fallback), enviada
+pelo Marcelo. Para trocar, substitua esses dois arquivos mantendo os nomes.
 
 ## Postagens iniciais do blog
 

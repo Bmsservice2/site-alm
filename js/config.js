@@ -39,26 +39,14 @@ window.ALM_CONFIG = {
     site: "https://almeidaleal.adv.br/"
   },
 
-  /* Hero: vídeo de fundo.
-     provider "youtube": toca o vídeo real do YouTube como FUNDO — sem
-       controles, sem cliques (pointer-events: none), sem título/link;
-       o visitante não tem como ser levado ao YouTube. Usa o domínio
-       youtube-nocookie.com (menos cookies). Precisa de internet.
-     provider "local": arquivo em assets/video/ (100% offline).
-     Em qualquer caso, a foto dos sócios (poster) aparece até o vídeo
-     começar e fica como fallback se ele não carregar. */
+  /* Hero: o vídeo de fundo foi RETIRADO a pedido do cliente (reunião de
+     03/11). O hero agora usa a imagem abstrata em
+     assets/img/escritorio/hero-abstrato.webp (.jpg de fallback).
+     Para voltar a usar vídeo, restaure o <video id="hero-video"> no
+     index.html e configure enabled/src aqui. */
   heroVideo: {
-    enabled: true,
-    atrasoMs: 3000,
-    provider: "local",
-    id: "",
-    src: "assets/video/banner.mp4",
-    webm: "assets/video/banner.webm",
-    poster: "assets/img/escritorio/socios-estudio.jpg",
-    respeitarMovimentoReduzido: false
+    enabled: false
   },
-
-
 
   /* ------------------------------------------------------------
      BLOG — ADAPTADOR DE DADOS  (banco de dados AINDA NÃO DEFINIDO)

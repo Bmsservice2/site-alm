@@ -105,6 +105,27 @@
     });
   }
   function rerenderForLanguage() { applyAreaLanguage(); renderAreas(); renderTeam(); if (window.ALM_I18N) window.ALM_I18N.refresh(); }
+  /* Botões Consultivo / Contencioso: cada um abre a equipe responsável
+     (js/data/areas.js → ALM_AREAS_TIMES, definição pendente da Jéssica). */
+  function modeTeam(a, mode) {
+    var map = (window.ALM_AREAS_TIMES || {})[a.id] || {};
+    return (map[mode] || []).map(function (slug) { return U.pessoa(slug); })
+      .filter(function (p) { return p && p.foto; });
+  }
+  function modeButton(a, mode, label) {
+    return '<button class="area__mode" type="button" data-area="' + a.id + '" data-mode="' + mode + '" aria-expanded="false" aria-controls="team-' + a.id + '-' + mode + '">' + label + '</button>';
+  }
+  function teamBlock(a, mode, label) {
+    var people = modeTeam(a, mode);
+    var chips = people.map(function (p) {
+      var img = '<img src="' + U.esc(U.photoSmall(p.foto)) + '" alt="" width="32" height="32" loading="lazy">';
+      return '<button class="chip" type="button" data-profile="' + p.slug + '">' + img + esc(p.nomeCurto || p.nome) + '</button>';
+    }).join("");
+    return '<div class="area__team" id="team-' + a.id + '-' + mode + '" role="region" aria-label="Equipe responsável — ' + label + '" hidden>' +
+      '<p class="area__people-label"><span>Equipe responsável</span> · <span>' + label + '</span></p>' +
+      (chips ? '<div class="chips">' + chips + '</div>' : '<p class="area__team-empty">Equipe em definição</p>') +
+    '</div>';
+  }
   function renderAreas() {
     var list = document.getElementById("areas-list");
     if (!list) { return; }
@@ -136,10 +157,14 @@
           '<svg class="area__icon" aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round">' + (ICONS[a.icone] || "") + '</svg>' +
           '<span class="area__text"><span class="area__title">' + esc(a.titulo) + '</span>' +
           '<span class="area__summary">' + esc(a.resumo) + '</span>' +
-          '<span class="area__tags"><span class="tag">Consultivo</span><span class="tag">Contencioso</span></span></span>' +
+          '</span>' +
           '<span class="area__toggle" aria-hidden="true"></span>' +
         '</button></h3>' +
+        '<div class="area__modes" role="group" aria-label="Equipe por modo de atuação">' +
+          modeButton(a, "consultivo", "Consultivo") + modeButton(a, "contencioso", "Contencioso") +
+        '</div>' +
         '<div class="area__panel" id="panel-' + a.id + '" role="region" aria-label="' + esc(a.titulo) + '"><div class="area__panel-inner"><div class="area__panel-content">' +
+          teamBlock(a, "consultivo", "Consultivo") + teamBlock(a, "contencioso", "Contencioso") +
           detail +
           (chips ? '<p class="area__people-label">Profissionais relacionados</p><div class="chips">' + chips + '</div>' : "") +
         '</div></div></div>' +
@@ -147,6 +172,23 @@
     }).join("");
 
     list.onclick = function (e) { // onclick (não addEventListener): re-renderizar não duplica o handler
+      var modeBtn = e.target.closest(".area__mode");
+      if (modeBtn) {
+        var item = modeBtn.closest(".area");
+        var mode = modeBtn.getAttribute("data-mode");
+        var team = item.querySelector("#team-" + modeBtn.getAttribute("data-area") + "-" + mode);
+        var wasActive = modeBtn.getAttribute("aria-expanded") === "true";
+        item.querySelectorAll(".area__mode").forEach(function (b) {
+          var on = (b === modeBtn) && !wasActive;
+          b.setAttribute("aria-expanded", on ? "true" : "false");
+          b.classList.toggle("is-active", on);
+        });
+        item.querySelectorAll(".area__team").forEach(function (t) { t.hidden = !(t === team && !wasActive); });
+        var h = item.querySelector(".area__head");
+        item.classList.add("is-open");
+        if (h) { h.setAttribute("aria-expanded", "true"); }
+        return;
+      }
       var head = e.target.closest(".area__head");
       if (!head) { return; }
       var li = head.closest(".area"); // o botão fica dentro de um <h3>

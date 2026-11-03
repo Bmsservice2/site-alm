@@ -1,4 +1,18 @@
 /* ÁREAS DE ATUAÇÃO — conteúdo institucional centralizado. */
+/* EQUIPE RESPONSÁVEL POR MODO DE ATUAÇÃO (botões Consultivo / Contencioso).
+   >>> PROVISÓRIO: a Jéssica Bastos vai definir a equipe de cada botão.
+   Até lá, a lista segue apenas o cargo informado em js/data/equipe.js
+   ("... Consultivo" / "... Contencioso"). Para ajustar, edite só este
+   objeto (slugs de js/data/equipe.js). Lista vazia mostra "Equipe em
+   definição". Quem ainda não tem foto não aparece (mesma regra do site). */
+window.ALM_AREAS_TIMES = {
+  tributario:  { consultivo: ["luana-secundino", "larissa-piotto", "gabriela-paranhos"], contencioso: ["eduarda-velloso", "julia-motta", "jaqueline-costa", "gabriel-pereira"] },
+  societario:  { consultivo: ["luciana-belarmino", "leonardo-crivano"], contencioso: [] },
+  contratos:   { consultivo: ["luciana-belarmino", "leonardo-crivano"], contencioso: [] },
+  civel:       { consultivo: [], contencioso: ["eduarda-velloso", "julia-motta", "jaqueline-costa", "gabriel-pereira"] },
+  trabalhista: { consultivo: ["nicolas-salles"], contencioso: ["nicolas-salles"] }
+};
+
 window.ALM_AREAS = [
   {
     id: "tributario",
