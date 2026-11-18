@@ -31,6 +31,22 @@
 - Foto do Leonardo Crivano (fundo claro) substituída por nova foto com fundo escuro,
   conforme pedido do cliente.
 
+## E-mail da Jéssica de 18/11/2026
+
+- Novas fotos da equipe: Nathalia Vivas, Pedro Bornay, Gabriel Pereira e Larissa Piotto
+  (recortes 2:3 em `assets/img/equipe/`). Só a Gabriela Paranhos segue sem foto.
+- Documento "Áreas de Atuação" (revisão do advogado, ALMA): nomes e textos aplicados em
+  `js/data/areas.js`, `js/site.js` (PT/EN/ES) e `js/i18n.js`. A área "Cível" virou
+  **Direito Regulatório** (id `regulatorio`); "Contratos" virou **Direito Civil e Contratos**;
+  "Societário" virou **Direito Societário**.
+- Equipe dos botões Consultivo / Contencioso definida conforme a lista da Jéssica
+  (`ALM_AREAS_TIMES`). Direito Regulatório ainda sem integrantes indicados.
+- Fotos do escritório otimizadas em `assets/img/escritorio/` (sala-reuniao, sala-estar,
+  estacoes-trabalho, placa-escritorio). **Simulação do hero** sem alterar o site publicado:
+  abrir `/?hero=sala-reuniao` (ou `sala-estar`, `estacoes-trabalho`, `placa-escritorio`).
+- PENDENTE: Júlia Salgado (documento) x Julia Motta (site); texto "da rotinas societárias"
+  do documento foi corrigido para "das rotinas societárias".
+
 ## O que NÃO deve ser inventado
 
 Ainda dependem de confirmação/arquivos do escritório:

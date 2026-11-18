@@ -78,25 +78,25 @@
     var lang = window.ALM_I18N ? window.ALM_I18N.get() : "pt";
     var T = {
       en: {
-        tributario:["Tax Law","The firm's main practice, with advisory and contentious work in tax matters."],
-        societario:["Corporate Law","Corporate structuring and organization and support for relationships among partners."],
-        contratos:["Contracts","Drafting, review and negotiation of contracts and disputes arising from them."],
-        civel:["Civil Law","Preventive advice and handling of civil disputes involving companies and individuals."],
+        tributario:["Tax Law","The firm's flagship practice, with advisory and contentious work."],
+        societario:["Corporate Law","Corporate structuring and organization, and support for day-to-day corporate routines."],
+        contratos:["Civil Law and Contracts","Drafting, review and negotiation of contracts and disputes arising from them."],
+        regulatorio:["Regulatory Law","Preventive advice and handling of matters in regulated markets."],
         trabalhista:["Labor Law","Advice on employment relationships and defense in labor claims and proceedings."]
       },
       es: {
-        tributario:["Derecho Tributario","Principal área de actuación del estudio, con asesoría y litigios en materia tributaria."],
-        societario:["Derecho Societario","Estructuración y organización de sociedades y acompañamiento de las relaciones entre socios."],
-        contratos:["Contratos","Elaboración, revisión y negociación de contratos y actuación en controversias derivadas de ellos."],
-        civel:["Derecho Civil","Asesoría preventiva y conducción de demandas civiles de empresas y personas."],
+        tributario:["Derecho Tributario","Principal área de actuación del estudio, con asesoría y litigios."],
+        societario:["Derecho Societario","Estructuración y organización de sociedades y acompañamiento de las rutinas societarias."],
+        contratos:["Derecho Civil y Contratos","Elaboración, revisión y negociación de contratos y actuación en controversias derivadas de ellos."],
+        regulatorio:["Derecho Regulatorio","Asesoría preventiva y conducción de demandas en mercados regulados."],
         trabalhista:["Derecho Laboral","Orientación en relaciones laborales y defensa en reclamaciones y procesos laborales."]
       }
     };
     var PT = {
-      tributario:["Direito Tributário","Carro-chefe do escritório, com atuação consultiva e contenciosa em matéria tributária."],
-      societario:["Societário","Estruturação e organização de sociedades e acompanhamento das relações entre sócios."],
-      contratos:["Contratos","Elaboração, revisão e negociação de contratos e atuação em disputas deles decorrentes."],
-      civel:["Cível","Assessoria preventiva e condução de demandas cíveis de interesse de empresas e pessoas."],
+      tributario:["Direito Tributário","Carro-chefe do escritório, com atuação consultiva e contenciosa."],
+      societario:["Direito Societário","Estruturação, organização de sociedades e acompanhamento das rotinas societárias."],
+      contratos:["Direito Civil e Contratos","Elaboração, revisão e negociação de contratos e atuação em disputas deles decorrentes."],
+      regulatorio:["Direito Regulatório","Assessoria preventiva e condução de demandas em mercados regulados."],
       trabalhista:["Trabalhista","Orientação nas relações de trabalho e defesa em reclamações e processos trabalhistas."]
     };
     (window.ALM_AREAS || []).forEach(function(a){
@@ -137,7 +137,7 @@
         tributario: ["raissa-de-almeida", "marcello-leal", "yan-molina"],
         societario: ["yan-molina"],
         contratos: ["yan-molina"],
-        civel: ["yan-molina"],
+        regulatorio: ["yan-molina"],
         trabalhista: ["yan-molina"]
       };
       var resp = (responsaveis[a.id] || []).map(function (slug) { return U.pessoa(slug); }).filter(Boolean);
@@ -517,6 +517,27 @@
      A foto fica visível durante atrasoMs e então o vídeo assume
      com fade. Esta chamada precisa acontecer após o HTML do Hero existir. */
   loadHeroVideo();
+
+  /* SIMULAÇÃO DO HERO COM FOTO DO ESCRITÓRIO (pedido da Jéssica, 18/11/2026).
+     O hero publicado continua com o fundo abstrato. Para avaliar uma foto do
+     escritório, abra o site com ?hero=sala-reuniao | sala-estar |
+     estacoes-trabalho | placa-escritorio (ex.: https://alm.bmsservice.com.br/?hero=sala-reuniao).
+     Nada é gravado: é só uma pré-visualização para quem recebe o link. */
+  (function heroSimulation() {
+    var FOTOS = { "sala-reuniao": "center 55%", "sala-estar": "center 60%", "estacoes-trabalho": "center 55%", "placa-escritorio": "center 40%" };
+    var key = "";
+    try { key = new URLSearchParams(window.location.search).get("hero") || ""; } catch (e) { return; }
+    if (!Object.prototype.hasOwnProperty.call(FOTOS, key)) { return; }
+    var media = document.querySelector(".hero__media");
+    var img = media && media.querySelector(".hero__poster");
+    var src = media && media.querySelector("source");
+    if (!img) { return; }
+    var base = "assets/img/escritorio/" + key;
+    if (src) { src.setAttribute("srcset", base + ".webp"); }
+    img.src = base + ".jpg";
+    img.width = 1920; img.height = 1440;
+    img.style.objectPosition = FOTOS[key];
+  })();
 
   fromHash();
 })();
